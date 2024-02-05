@@ -38,7 +38,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-// Limit requests from same IP
+// Limit requests from same IP pp
 const limiter = rateLimit({
   max: 100,
   windowMs: 60 * 60 * 1000,
