@@ -7,7 +7,7 @@ const factory = require('./handleFactory');
 //post a review
 exports.setTourUserIds = (req, res, next) => {
   // this where merging params is seen clearly
-  console.log(req.params.tourId);
+  // console.log(req.params.tourId);
   if (!req.body.tour) req.body.tour = req.params.tourId;
   if (!req.body.tour)
     return next(new AppError('A review must include a tour ID', 400));

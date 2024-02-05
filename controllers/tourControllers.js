@@ -146,7 +146,7 @@ exports.getTourStats = catchAsync(async (req, res, next) => {
     { $sort: { avgPrice: 1 } },
     // { $match: { _id: { $ne: 'EASY' } } },
   ]);
-  console.log(stats);
+  // console.log(stats);
   res.status(201).json({
     status: 'success',
     data: {

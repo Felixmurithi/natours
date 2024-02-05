@@ -11,9 +11,7 @@ export const bookTour = async (tourId) => {
     // 1. get checkout session from the booking route endpoint
 
     // if u only want to do get u can skip write the type of request ie 'GET
-    const session = await axios(
-      `http://127.0.0.1:3000/api/v1/bookings/checkout-session/${tourId}`,
-    );
+    const session = await axios(`/api/v1/bookings/checkout-session/${tourId}`);
 
     // create checkout form + credit card
     await stripe.redirectToCheckout({

@@ -7,6 +7,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const helmet = require('helmet');
 const cookieParse = require('cookie-parser');
+const compression = require('compression');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -75,6 +76,8 @@ app.use(
 //   // console.log('Hello from teh middleware');
 //   next();
 // });
+
+app.use(compression);
 app.use((request, response, next) => {
   request.requestTime = new Date().toISOString();
   // console.log(request.cookies); ??

@@ -212,7 +212,7 @@ exports.forgetPassword = catchAsync(async (req, res, next) => {
     user.PasswordResetToken = undefined;
     user.PasswordResetTokenExpireIn = undefined;
     await user.save({ validateBeforeSave: false });
-    console.log(err);
+    // console.log(err);
     return next(new AppError('There is no email adress'), 401);
   }
 });
@@ -262,7 +262,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   // current object in memory and the validate moongose middlweare woldnt
   //work -why??
 
-  console.log(user.password);
+  // console.log(user.password);
 
   //check if user exists && password exists
   if (!user || !(await user.correctPassword(renterPassword, user.password))) {
