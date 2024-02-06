@@ -21,7 +21,7 @@ const reviewRouter = require('./routes/reviewRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 
-const { type } = require('os');
+// const { type } = require('os');
 
 /// start server app
 const app = express();
@@ -33,7 +33,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(cors());
 // app.options('/api/v1/tours/:id', cors());
 
-// app.options();
+app.options('*', cors());
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -58,11 +58,11 @@ app.use('/api', limiter);
 
 // use the body as a sstream ??
 // body-parser depreacted by express.raw
-app.post(
-  'webhook-checkout',
-  bodyParser({ type: 'application/json' }),
-  bookingController.webhookCheckout,
-);
+// app.post(
+//   'webhook-checkout',
+//   bodyParser.raw({ type: 'application/json' }),
+//   bookingController.webhookCheckout,
+// );
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
 // app.use(express.urlencoded({ extended: true, limit: '10kb' }));
