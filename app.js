@@ -58,11 +58,11 @@ app.use('/api', limiter);
 
 // use the body as a sstream ??
 // body-parser depreacted by express.raw
-// app.post(
-//   'webhook-checkout',
-//   bodyParser.raw({ type: 'application/json' }),
-//   bookingController.webhookCheckout,
-// );
+app.post(
+  'webhook-checkout',
+  bodyParser.raw({ type: 'application/json' }),
+  bookingController.webhookCheckout,
+);
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
 // app.use(express.urlencoded({ extended: true, limit: '10kb' }));
