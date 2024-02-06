@@ -6,12 +6,14 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const helmet = require('helmet');
-const cookieParse = require('cookie-parser');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const compression = require('compression');
 const cors = require('cors');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
+const bookingController = require('./controllers/bookingController');
 
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
@@ -19,7 +21,7 @@ const reviewRouter = require('./routes/reviewRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 
-const cookieParser = require('cookie-parser');
+const { type } = require('os');
 
 /// start server app
 const app = express();
@@ -54,6 +56,13 @@ const limiter = rateLimit({
 });
 app.use('/api', limiter);
 
+// use the body as a sstream ??
+// body-parser depreacted by express.raw
+app.post(
+  'webhook-checkout',
+  bodyParser({ type: 'application/json' }),
+  bookingController.webhookCheckout,
+);
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
 // app.use(express.urlencoded({ extended: true, limit: '10kb' }));
