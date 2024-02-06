@@ -42,11 +42,23 @@ const server = app.listen(port, () => {
   console.log(`App Running on port ${port}`);
 });
 
+// server.close allows the server to be closed after all resoonses are mnet if
+// there is an unhandled rejection
 process.on('unhandledRejection', (err) => {
   console.log(err.name, err.message);
   console.log('UNHANDLED REJECTION! 💥 Shuuting down ');
   server.close(() => {
     process.exit(1);
+  });
+});
+
+// listen to this term because heroku dynos restarting every 24hrs abruptly
+//?? process.on
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received, shutting down gracefuly');
+
+  server.close(() => {
+    console.log('💥 process terminated.');
   });
 });
 

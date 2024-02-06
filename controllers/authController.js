@@ -6,13 +6,6 @@ const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 const Email = require('./../utils/email');
 
-const cookieOptions = {
-  expires: new Date(
-    Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
-  ),
-  httpOnly: true,
-};
-
 const signToken = (id) => {
   return jwt.sign({ id: id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
@@ -22,9 +15,16 @@ const signToken = (id) => {
 const createSendToken = (user, statusCode, req, res) => {
   const token = signToken(user._id);
 
-  if (process.env.NODE_ENV === 'production ') cookieOptions.secure = true;
+  // if (process.env.NODE_ENV === 'production ') cookieOptions.secure = true;
+  // if (req.secure|| req.headers('x-forwarded-proto'==='https')) cookieOptions.secure = true;
   user.password = user.active = undefined;
-  res.cookie('jwt', token, cookieOptions);
+  res.cookie('jwt', token, {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
+    ),
+    httpOnly: true,
+    secure: req.secure || req.headers('x-forwarded-proto') === 'https',
+  });
   res.status(statusCode).json({
     Request_Time: req.requestTime,
     status: 'success',
