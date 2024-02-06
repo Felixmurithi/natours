@@ -59,7 +59,7 @@ app.use('/api', limiter);
 // use the body as a sstream ??
 // body-parser depreacted by express.raw
 app.post(
-  'webhook-checkout',
+  '/webhook-checkout',
   bodyParser.raw({ type: 'application/json' }),
   bookingController.webhookCheckout,
 );
