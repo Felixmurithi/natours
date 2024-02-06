@@ -77,12 +77,12 @@ app.use(
 //   next();
 // });
 
-app.use(compression);
-app.use((request, response, next) => {
-  request.requestTime = new Date().toISOString();
-  // console.log(request.cookies); ??
-  next();
-});
+app.use(compression());
+// app.use((request, response, next) => {
+//   request.requestTime = new Date().toISOString();
+//   // console.log(request.cookies); ??
+//   next();
+// });
 
 //////NOTES
 //route is the url and the http method to be applied
