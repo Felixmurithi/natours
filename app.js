@@ -8,7 +8,7 @@ const hpp = require('hpp');
 const helmet = require('helmet');
 const cookieParse = require('cookie-parser');
 const compression = require('compression');
-const cors = require('cors');
+// const cors = require('cors');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -31,7 +31,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(cors());
 // app.options('/api/v1/tours/:id', cors());
 
-app.options();
+// app.options();
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')));
 

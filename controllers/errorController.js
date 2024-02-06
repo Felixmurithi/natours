@@ -29,17 +29,18 @@ const handleJWTExpiredError = () =>
 
 const sendErrorDev = (err, req, res) => {
   if (req.originalUrl.startsWith('/api')) {
-    res.status(err.statusCode).json({
+    return res.status(err.statusCode).json({
       status: err.status,
       error: err,
       message: err.message,
       stack: err.stack,
     });
-  } else
-    res.status(err.statusCode).render('error', {
-      title: 'Something went wrong',
-      msg: err.message,
-    });
+  }
+  console.error('ERROR 💥', err);
+  return res.status(err.statusCode).render('error', {
+    title: 'Something went wrong',
+    msg: err.message,
+  });
 };
 
 //if use ifs only remember to return responses
