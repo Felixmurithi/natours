@@ -8,7 +8,7 @@ const hpp = require('hpp');
 const helmet = require('helmet');
 const cookieParse = require('cookie-parser');
 const compression = require('compression');
-// const cors = require('cors');
+const cors = require('cors');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
