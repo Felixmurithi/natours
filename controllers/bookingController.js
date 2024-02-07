@@ -64,7 +64,7 @@ const createBookingCheckout = async (session) => {
   console.log(
     session.client_reference_id,
     session.customer_email,
-    session.data.amount_subtotal,
+    session.object.amount_subtotal,
   );
   const tour = session.client_reference_id;
   const user = (await User.findOne({ email: session.customer_email })).id;
