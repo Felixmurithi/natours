@@ -61,15 +61,14 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 
 // sent in https/ heruku ??
 const createBookingCheckout = async (session) => {
-  console.log(session);
-  // console.log(
-  //   session.client_reference_id,
-  //   session.customer_email,
-  //   session.data.amount_subtotal,
-  // );
+  console.log(
+    session.client_reference_id,
+    session.customer_email,
+    session.data.amount_subtotal,
+  );
   const tour = session.client_reference_id;
-  const user = (await User.findOne({ email: session.customer_email }))._id;
-  const price = session.data.amount_subtotal / 100;
+  const user = (await User.findOne({ email: session.customer_email })).id;
+  const price = session.object.amount_subtotal / 100;
   await Booking.create({ tour, user, price });
 };
 
