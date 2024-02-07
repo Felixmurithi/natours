@@ -8,15 +8,6 @@ const User = require('../models/userModels');
 
 const router = express.Router();
 
-router.get('/test', async (req, res, next) => {
-  const user = (await User.findOne({ email: 'eliana@example.com' }))._id;
-  console.log(user);
-
-  res.status(200).json({
-    user,
-  });
-});
-
 router.post('/signup', authController.signup);
 router.post('/login', authController.login);
 router.get('/logout', authController.logout);

@@ -163,7 +163,7 @@ exports.isLoggenIn = async (req, res, next) => {
       if (currentUser.changedPasswordAfter(decoded.iat)) {
         return next();
       }
-      // locals passes data to pug
+      // locals passes data to pug/ all templates rendered will have acess
       res.locals.user = currentUser;
       return next();
     }
